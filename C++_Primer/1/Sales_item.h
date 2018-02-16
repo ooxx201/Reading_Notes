@@ -55,6 +55,7 @@ public:
 public:
     // operations on Sales_item objects
     double avg_price() const;
+    std::string getIsbn() const { return isbn; }
     bool same_isbn(const Sales_item &rhs) const
         { return isbn == rhs.isbn; }
     // default constructor needed to initialize members of built-in type
