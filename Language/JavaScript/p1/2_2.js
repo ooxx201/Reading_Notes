@@ -47,3 +47,43 @@ function foo3() {
 foo3(); // 直接调用foo()
 // window.foo3(); // 通过window.foo()调用
 
+console.log('-----------------名字空间----------------');
+// 全局变量会绑定到window上，不同的JavaScript文件如果使用了相同的全局变量，或者定义了相同名字的顶层函数 都会造成命名冲突，并且很难被发现。
+// 减少冲突的一个方法是把自己的所有变量和函数全部绑定到一个全局变量中。例如：
+// 把自己的代码全部放入唯一的名字空间MYAPP中，会大大减少全局变量冲突的可能。
+
+// 唯一的全局变量MYAPP:
+var MYAPP = {};
+
+// 其他变量:
+MYAPP.name = 'myapp';
+MYAPP.version = 1.0;
+
+// 其他函数:
+MYAPP.foo = function () {
+    return 'foo';
+};
+
+console.log('-----------------局部作用域---------------');
+// JavaScript的变量作用域实际上是函数内部，我们在for循环等语句块中是无法定义具有局部作用域的变量的：
+function foo4() {
+    for (var i=0; i<100; i++) {
+        //
+    }
+    i += 100; // 仍然可以引用变量i
+}
+
+// 用let替代var可以申明一个块级作用域的变量：
+function foo5() {
+    var sum = 0;
+    for (let i=0; i<100; i++) {
+        sum += i;
+    }
+    // SyntaxError:
+    i += 1;
+}
+
+console.log('-------------------常量-----------------');
+const PI = 3.14;
+// PI = 3; // 某些浏览器不报错，但是无效果！
+console.log(PI); // 3.14
